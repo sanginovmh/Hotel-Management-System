@@ -1,5 +1,6 @@
 package com.org.entity;
 
+import com.org.interfaces.PhotoFolderable;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Service {
+public class Service implements PhotoFolderable {
     @Id
     @GeneratedValue
     private Integer id;
@@ -60,7 +61,7 @@ public class Service {
                     CascadeType
                             .ALL
     )
-    private PhotoFolder photoFolders;
+    private PhotoFolder photoFolder;
 
     private String specialDetails;
 }
