@@ -1,4 +1,15 @@
 package com.org.dao;
 
-public class DataAccessObject {
+import java.util.List;
+
+public interface DataAccessObject {
+    void save(Object o);
+
+    void update(Integer id, Object object);
+
+    Object findById(Integer id);
+
+    List<Object> findAll();
+
+    void delete(Integer id);
 }

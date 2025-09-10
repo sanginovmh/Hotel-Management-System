@@ -85,4 +85,10 @@ public class Branch {
                     "branch_id"
     )
     private List<Review> reviews;
+
+    @OneToOne(
+            mappedBy =
+                    "branch"
+    )
+    private Manager manager;
 }

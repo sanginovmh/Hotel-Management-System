@@ -12,7 +12,8 @@ public class Card {
 
     @ManyToOne(
             fetch =
-                    FetchType.LAZY
+                    FetchType
+                            .LAZY
     )
     private Customer customer;
 
