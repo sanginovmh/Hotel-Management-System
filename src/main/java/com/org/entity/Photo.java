@@ -1,9 +1,6 @@
 package com.org.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -13,6 +10,10 @@ public class Photo {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(
+            fetch =
+                    FetchType
+                            .LAZY
+    )
     private PhotoFolder photoFolder;
 }

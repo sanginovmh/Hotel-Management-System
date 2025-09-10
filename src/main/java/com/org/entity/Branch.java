@@ -26,13 +26,12 @@ public class Branch {
                     FetchType
                             .LAZY,
 
+            orphanRemoval =
+                    true,
+
             cascade =
                     CascadeType
                             .ALL
-    )
-    @JoinColumn(
-            name =
-                    "branch_id"
     )
     private List<Room> rooms;
 
@@ -44,13 +43,12 @@ public class Branch {
                     FetchType
                             .LAZY,
 
+            orphanRemoval =
+                    true,
+
             cascade =
                     CascadeType
                             .ALL
-    )
-    @JoinColumn(
-            name =
-                    "branch_id"
     )
     private List<Service> services;
 
@@ -62,10 +60,6 @@ public class Branch {
                     FetchType
                             .LAZY
     )
-    @JoinColumn(
-            name =
-                    "branch_id"
-    )
     private List<Employee> employees;
 
     @OneToMany(
@@ -76,19 +70,19 @@ public class Branch {
                     FetchType
                             .LAZY,
 
+            orphanRemoval =
+                    true,
+
             cascade =
                     CascadeType
                             .ALL
     )
-    @JoinColumn(
-            name =
-                    "branch_id"
-    )
     private List<Review> reviews;
 
     @OneToOne(
-            mappedBy =
-                    "branch"
+            fetch =
+                    FetchType
+                            .LAZY
     )
     private Manager manager;
 }

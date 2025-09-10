@@ -12,14 +12,36 @@ public class Employee {
     @GeneratedValue
     private Integer id;
 
+    @Column(
+            nullable =
+                    false
+    )
     private String fullName;
 
     private String position;
 
+    @Column(
+            unique =
+                    true,
+
+            nullable =
+                    false
+    )
     private String phone;
 
+    @Column(
+            unique =
+                    true,
+
+            nullable =
+                    false
+    )
     private String email;
 
+    @Column(
+            nullable =
+                    false
+    )
     private String password;
 
     @ManyToOne(

@@ -15,8 +15,16 @@ public class Card {
                     FetchType
                             .LAZY
     )
+    @JoinColumn(
+            nullable =
+                    false
+    )
     private Customer customer;
 
+    @Column(
+            unique =
+                    true
+    )
     private Integer number;
 
     private String expDate;

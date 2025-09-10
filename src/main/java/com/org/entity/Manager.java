@@ -10,20 +10,30 @@ public class Manager {
     @GeneratedValue
     private Integer id;
 
+    @Column(
+            nullable =
+                    false
+    )
     private String fullName;
 
+    @Column(
+            unique =
+                    true,
+
+            nullable =
+                    false
+    )
     private String email;
 
+    @Column(
+            nullable =
+                    false
+    )
     private String password;
 
     @OneToOne(
-            fetch =
-                    FetchType
-                            .LAZY,
-
-            cascade =
-                    CascadeType
-                            .ALL
+            mappedBy =
+                    "manager"
     )
     private Branch branch;
 }

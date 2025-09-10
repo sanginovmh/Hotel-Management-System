@@ -12,14 +12,40 @@ public class Customer {
     @GeneratedValue
     private Integer id;
 
+    @Column(
+            nullable =
+                    false
+    )
     private String firstName;
 
+    @Column(
+            nullable =
+                    false
+    )
     private String lastName;
 
+    @Column(
+            unique =
+                    true,
+
+            nullable =
+                    false
+    )
     private String phone;
 
+    @Column(
+            unique =
+                    true,
+
+            nullable =
+                    false
+    )
     private String email;
 
+    @Column(
+            nullable =
+                    false
+    )
     private String password;
 
     @OneToOne(
@@ -42,7 +68,14 @@ public class Customer {
 
             fetch =
                     FetchType
-                            .LAZY
+                            .LAZY,
+
+            orphanRemoval =
+                    true,
+
+            cascade =
+                    CascadeType
+                            .ALL
     )
     private List<Card> cards;
 }

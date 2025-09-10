@@ -35,7 +35,7 @@ public class Booking {
                     CascadeType
                             .ALL
     )
-    private List<ReservedRoom> reservedRooms;
+    private List<BookedRoom> bookedRooms;
 
     @OneToMany(
             mappedBy =
@@ -52,9 +52,16 @@ public class Booking {
                     CascadeType
                             .ALL
     )
-    private List<ReservedService> reservedServices;
+    private List<BookedService> bookedServices;
 
-    @OneToOne
+    @OneToOne(
+            fetch =
+                    FetchType
+                            .LAZY
+    )
+    @JoinColumn(
+            nullable =
+                    false)
     private Payment payment;
 
     private BookingStatus status;
