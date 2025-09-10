@@ -39,7 +39,7 @@ public class AdminDAO implements DataAccessObject<Admin> {
     }
 
     @Override
-    public Admin findById(Integer id) {
+    public Optional<Admin> findById(Integer id) {
         EntityManager em =
                 EntityManagerDAO
                         .getEntityManager();
@@ -52,7 +52,8 @@ public class AdminDAO implements DataAccessObject<Admin> {
         em.getTransaction().commit();
         em.close();
 
-        return admin;
+        return Optional
+                .ofNullable(admin);
     }
 
     @Override

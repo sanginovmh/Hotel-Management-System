@@ -39,7 +39,7 @@ public class ManagerDAO implements DataAccessObject<Manager> {
     }
 
     @Override
-    public Manager findById(Integer id) {
+    public Optional<Manager> findById(Integer id) {
         EntityManager em =
                 EntityManagerDAO
                         .getEntityManager();
@@ -52,7 +52,8 @@ public class ManagerDAO implements DataAccessObject<Manager> {
         em.getTransaction().commit();
         em.close();
 
-        return manager;
+        return Optional
+                .ofNullable(manager);
     }
 
     @Override

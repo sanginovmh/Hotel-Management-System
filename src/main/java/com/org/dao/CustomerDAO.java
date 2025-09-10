@@ -39,7 +39,7 @@ public class CustomerDAO implements DataAccessObject<Customer> {
     }
 
     @Override
-    public Customer findById(Integer id) {
+    public Optional<Customer> findById(Integer id) {
         EntityManager em =
                 EntityManagerDAO
                         .getEntityManager();
@@ -52,7 +52,8 @@ public class CustomerDAO implements DataAccessObject<Customer> {
         em.getTransaction().commit();
         em.close();
 
-        return customer;
+        return Optional
+                .ofNullable(customer);
     }
 
     @Override
