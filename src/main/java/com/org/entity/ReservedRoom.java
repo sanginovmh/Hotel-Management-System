@@ -1,21 +1,27 @@
 package com.org.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReservedRoom {
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @ManyToOne
     private Room room;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name =
                     "cart_id"

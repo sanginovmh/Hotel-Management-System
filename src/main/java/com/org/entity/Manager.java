@@ -1,13 +1,19 @@
 package com.org.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Manager {
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(

@@ -63,7 +63,11 @@ public class PhotoService {
             String storedFileName = cleanFileName + "-" + uniqueSuffix;
 
             Path target = Path.of(LOCATION, storedFileName);
-            Files.copy(part.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(
+                    part.getInputStream(),
+                    target,
+                    StandardCopyOption.REPLACE_EXISTING
+            );
 
             return storedFileName;
         } catch (IOException e) {

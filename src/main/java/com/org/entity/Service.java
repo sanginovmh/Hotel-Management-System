@@ -2,15 +2,21 @@ package com.org.entity;
 
 import com.org.interfaces.PhotoFolderable;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Service implements PhotoFolderable {
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @ManyToOne(
@@ -47,12 +53,12 @@ public class Service implements PhotoFolderable {
                             "employee_id"
             )
     )
-    private List<Employee> employees;
+    private List<Employee> employees = new java.util.ArrayList<>();
 
     @OneToOne(
             fetch =
                     FetchType
-                            .LAZY,
+                            .EAGER,
 
             orphanRemoval =
                     true,
@@ -64,4 +70,18 @@ public class Service implements PhotoFolderable {
     private PhotoFolder photoFolder;
 
     private String specialDetails;
+
+    public void addEmployee(Employee employee) {
+        if (!employees.contains(employee)) {
+            employees.add(employee);
+            employee.getServices().add(this);
+        }
+    }
+
+    public void removeEmployee(Employee employee) {
+        if (employees.contains(employee)) {
+            employees.remove(employee);
+            employee.getServices().remove(this);
+        }
+    }
 }

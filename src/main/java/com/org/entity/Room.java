@@ -2,13 +2,19 @@ package com.org.entity;
 
 import com.org.interfaces.PhotoFolderable;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Room implements PhotoFolderable {
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @ManyToOne(
@@ -25,7 +31,7 @@ public class Room implements PhotoFolderable {
     @OneToOne(
             fetch =
                     FetchType
-                            .LAZY,
+                            .EAGER,
 
             orphanRemoval =
                     true,

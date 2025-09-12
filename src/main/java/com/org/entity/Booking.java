@@ -2,15 +2,22 @@ package com.org.entity;
 
 import com.org.entity.enums.BookingStatus;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Booking {
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @ManyToOne(
@@ -35,7 +42,7 @@ public class Booking {
                     CascadeType
                             .ALL
     )
-    private List<BookedRoom> bookedRooms;
+    private List<BookedRoom> bookedRooms = new ArrayList<>();
 
     @OneToMany(
             mappedBy =
@@ -52,12 +59,13 @@ public class Booking {
                     CascadeType
                             .ALL
     )
-    private List<BookedService> bookedServices;
+    private List<BookedService> bookedServices = new ArrayList<>();
 
     @OneToOne(
             fetch =
                     FetchType
-                            .LAZY
+                            .LAZY,
+            cascade = CascadeType.PERSIST
     )
     @JoinColumn(
             nullable =

@@ -1,15 +1,22 @@
 package com.org.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PhotoFolder {
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @OneToMany(
@@ -20,7 +27,10 @@ public class PhotoFolder {
                     true,
 
             fetch =
-                    FetchType.EAGER
+                    FetchType.EAGER,
+
+            cascade =
+                    CascadeType.ALL
     )
-    private List<Photo> photos;
+    private List<Photo> photos = new ArrayList<>();
 }

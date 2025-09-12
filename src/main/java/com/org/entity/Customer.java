@@ -1,21 +1,22 @@
 package com.org.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(
@@ -83,5 +84,15 @@ public class Customer {
                     CascadeType
                             .ALL
     )
-    private List<Card> cards;
+    private List<Card> cards = new ArrayList<>();
+
+    public void addCard(Card card) {
+        cards.add(card);
+        card.setCustomer(this);
+    }
+
+    public void removeCard(Card card) {
+        cards.remove(card);
+        card.setCustomer(null);
+    }
 }

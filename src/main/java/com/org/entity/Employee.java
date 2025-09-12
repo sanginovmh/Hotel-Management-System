@@ -1,15 +1,22 @@
 package com.org.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
     @Id
     @GeneratedValue
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @Column(
@@ -63,7 +70,21 @@ public class Employee {
                     CascadeType
                             .MERGE
     )
-    private List<Service> services;
+    private List<Service> services = new ArrayList<>();
 
     private Double salary;
+
+    public void addService(Service service) {
+        if (!services.contains(service)) {
+            services.add(service);
+            service.getEmployees().add(this);
+        }
+    }
+
+    public void removeService(Service service) {
+        if (services.contains(service)) {
+            services.remove(service);
+            service.getEmployees().remove(this);
+        }
+    }
 }
